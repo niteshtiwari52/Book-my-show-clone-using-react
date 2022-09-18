@@ -14,16 +14,30 @@ const HomePage = () => {
   const [onlineStreamEvents, setOnlineStreamEvents] = useState([]);
 
   useEffect(() => {
+    const requestPopularMovies = async () => {
+      const getPopularMovies = await axios.get("/movie/popular");
+      setRecommendedMoives(getPopularMovies.data.results);
+    };
+
+    requestPopularMovies();
+  }, []);
+
+  useEffect(() => {
     const requestTopRatedMovies = async () => {
-      const getTopRatedMovies = await axios.get(
-        "https://api.themoviedb.org/3/movie/top_rated?api_key=95a530407eeb06f446cf83828532d3ec"
-      );
-      setRecommendedMoives(getTopRatedMovies.data.results);
+      const getTopRatedMovies = await axios.get("/movie/top_rated");
+      setPremierMovies(getTopRatedMovies.data.results);
     };
 
     requestTopRatedMovies();
   }, []);
+  useEffect(() => {
+    const requestUpcomingMovies = async () => {
+      const getUpcomingMovies = await axios.get("/movie/upcoming");
+      setOnlineStreamEvents(getUpcomingMovies.data.results);
+    };
 
+    requestUpcomingMovies();
+  }, []);
   return (
     <>
       <HeroCarousel />
@@ -54,7 +68,7 @@ const HomePage = () => {
             />
           </div>
           <PosterSlider
-            title="Recommended Movies"
+            title="Premier Movies"
             subtitle="Brand new releases every friday"
             posters={premierMovies}
             isDark={true}
@@ -66,8 +80,8 @@ const HomePage = () => {
         <PosterSlider
           title="Online Streaming Events"
           subtitle="Brand new releases every friday"
-          posters={recommendedMovies}
-          isDark={true}
+          posters={onlineStreamEvents}
+          isDark={false}
         />
       </div>
     </>
