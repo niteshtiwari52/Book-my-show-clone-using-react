@@ -45,6 +45,14 @@ const HeroCarousel = () => {
   // settings for sliders
 
   // for large screen
+  // const settingLG = {
+  //   className: "center",
+  //   centerMode: true,
+  //   infinite: true,
+  //   centerPadding: "190px",
+  //   slidesToShow: 1,
+  //   speed: 500,
+  // };
   const settingLG = {
     dots: true,
     arrows: true,

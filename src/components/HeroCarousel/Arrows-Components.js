@@ -12,4 +12,14 @@ export function NextArrow(props) {
   );
 }
 
-export function PrevArrow(props) {}
+export function PrevArrow(props) {
+  return (
+    <>
+      <div
+        className={props.className}
+        style={{ ...props.style }}
+        onClick={props.onClick}
+      />
+    </>
+  );
+}

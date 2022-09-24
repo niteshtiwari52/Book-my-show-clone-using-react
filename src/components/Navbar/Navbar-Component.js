@@ -49,11 +49,13 @@ function NavLg() {
       <div className="container flex mx-auto px-4 items-center justify-between">
         <div className="flex items-center w-1/2 gap-3">
           <div className="w-10 h-10">
-            <img
-              src="https://i.ibb.co/zPBYW3H/imgbin-bookmyshow-office-android-ticket-png.png"
-              alt="logo"
-              className="w-full h-full"
-            />
+            <Link to="/">
+              <img
+                src="https://i.ibb.co/zPBYW3H/imgbin-bookmyshow-office-android-ticket-png.png"
+                alt="logo"
+                className="w-full h-full"
+              />
+            </Link>
           </div>
           <div className="w-full flex items-center gap-3 bg-white px-3 py-1 rounded-md">
             <BiSearch />
@@ -86,6 +88,32 @@ function NavLg() {
   );
 }
 
+function NavMenu() {
+  return (
+    <div className="bg-darkBackground-800 w-full p-0 ">
+      <div className=" w-4/5 bg-darkBackground-750 mx-auto">
+        <div className=" flex justify-center h-full">
+          <div className="flex items-center gap-4 text-sm text-gray-300 w-3/4 h-10">
+            <Link to="/plays">Movie</Link>
+            <Link to="/plays">Stream</Link>
+            <Link to="/plays">Events</Link>
+            <Link to="/plays">Plays</Link>
+            <Link to="/plays">Sports</Link>
+            <Link to="/plays">Activities</Link>
+            <Link to="/plays">Buzz</Link>
+          </div>
+          <div className="flex items-center gap-4 text-sm text-gray-300  ">
+            <Link to="/plays">ListYourShow</Link>
+            <Link to="/plays">Corporates</Link>
+            <Link to="/plays">Offers</Link>
+            <Link to="/plays">Gift Cards</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Main component
 const Navbar = () => {
   return (
@@ -106,6 +134,7 @@ const Navbar = () => {
           <NavLg />
         </div>
       </nav>
+      <NavMenu />
     </>
   );
 };
