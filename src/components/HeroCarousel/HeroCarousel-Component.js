@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-
-// for carousel
-import HeroSlider from "react-slick";
-import { NextArrow, PrevArrow } from "./Arrows-Components";
+// swiper import
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 
 const HeroCarousel = () => {
   const [images, setImages] = useState([
@@ -43,65 +44,66 @@ const HeroCarousel = () => {
   ]);
 
   // settings for sliders
-
-  // for large screen
-  // const settingLG = {
-  //   className: "center",
-  //   centerMode: true,
-  //   infinite: true,
-  //   centerPadding: "190px",
-  //   slidesToShow: 1,
-  //   speed: 500,
-  // };
-  const settingLG = {
-    dots: true,
-    arrows: true,
-    slidesToShow: 1,
-    infinite: true,
-    speed: 500,
-    slideToScroll: 1,
-  };
-
-  // for medium screen
-  const settings = {
-    arrows: true,
-    slidesToShow: 1,
-    infinite: true,
-    speed: 500,
-    slideToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+  // swiper settings
+  const slideConfig = {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    pagination: {
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
+      1024: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+      },
+    },
+    modules: [Navigation],
+    className: "mySwiper",
+    navigation: true,
   };
 
   return (
     <>
       {/* For meduim screen */}
       <div className="lg:hidden">
-        <HeroSlider {...settings}>
+        <Swiper {...slideConfig}>
           {images.map((images, index) => (
-            <div className="w-full h-56 md:h-80 py-3" key={index}>
-              <img
-                src={`https://image.tmdb.org/t/p/original${images.backdrop_path}`}
-                alt="Hero Banner"
-                className="w-full h-full rounded-md object-cover"
-              />
-            </div>
+            <SwiperSlide>
+              <div className="w-full h-56 md:h-80 py-3" key={index}>
+                <img
+                  src={`https://image.tmdb.org/t/p/original${images.backdrop_path}`}
+                  alt="Hero Banner"
+                  className="w-full h-full rounded-md object-cover"
+                />
+              </div>
+            </SwiperSlide>
           ))}
-        </HeroSlider>
+        </Swiper>
       </div>
       {/* For large screen */}
       <div className="hidden lg:block">
-        <HeroSlider {...settingLG}>
+        <Swiper {...slideConfig}>
           {images.map((images, index) => (
-            <div className="w-full h-56 md:h-80 py-3" key={index}>
-              <img
-                src={`https://image.tmdb.org/t/p/original${images.backdrop_path}`}
-                alt="Hero Banner"
-                className="w-full h-full rounded-md object-cover"
-              />
-            </div>
+            <SwiperSlide>
+              <div className="w-full h-56 md:h-80 py-3" key={index}>
+                <img
+                  src={`https://image.tmdb.org/t/p/original${images.backdrop_path}`}
+                  alt="Hero Banner"
+                  className="w-full h-full rounded-md object-cover"
+                />
+              </div>
+            </SwiperSlide>
           ))}
-        </HeroSlider>
+        </Swiper>
       </div>
     </>
   );

@@ -133,8 +133,8 @@ const Navbar = () => {
         <div className="hidden md:hidden lg:flex ">
           <NavLg />
         </div>
+        {/* <NavMenu /> */}
       </nav>
-      <NavMenu />
     </>
   );
 };
