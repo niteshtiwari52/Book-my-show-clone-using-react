@@ -1,43 +1,43 @@
 import React from "react";
-import Slider from "react-slick";
 import Poster from "../Poster/Poster-Component.js";
+// swiper import
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 
 const PosterSlider = (props) => {
   const { posters, title, subtitle, isDark, config } = props;
-  const settings = {
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 4,
-    initialScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 3,
-        },
+  const slideConfig = {
+    slidesPerView: 5,
+    spaceBetween: 20,
+    loop: true,
+    pagination: {
+      clickable: true,
+    },
+    breakpoints: {
+      350: {
+        slidesPerView: 2,
+        spaceBetween: 20,
       },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialScroll: 1,
-          initialSlide: 3,
-        },
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 20,
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
+      1000: {
+        slidesPerView: 4,
+        spaceBetween: 20,
       },
-    ],
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+    },
+    modules: [Navigation],
+    className: "mySwiper",
+    navigation: true,
   };
+
 
   return (
     <>
@@ -53,20 +53,27 @@ const PosterSlider = (props) => {
           {subtitle}
         </p>
       </div>
+      
       {config && (
-        <Slider {...config}>
+        <Swiper {...config}>
           {posters.map((each, index) => (
+             <SwiperSlide>
             <Poster {...each} isDark={isDark} key={index} />
+            </SwiperSlide>
           ))}
-        </Slider>
+       </Swiper>
       )}
+     
       {!config && (
-        <Slider {...settings}>
+        <Swiper {...slideConfig}>
           {posters.map((each, index) => (
+            <SwiperSlide>
             <Poster {...each} isDark={isDark} key={index} />
+            </SwiperSlide>
           ))}
-        </Slider>
+         </Swiper>
       )}
+
     </>
   );
 };

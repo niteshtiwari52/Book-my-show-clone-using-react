@@ -67,12 +67,14 @@ const HomePage = () => {
               className="w-full h-full"
             />
           </div>
+          <div className="container mx-auto px-4 md:px-12 my-8 ">
           <PosterSlider
             title="Premier Movies"
             subtitle="Brand new releases every friday"
             posters={premierMovies}
             isDark={true}
           />
+          </div>
         </div>
       </div>
 

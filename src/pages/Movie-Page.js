@@ -3,12 +3,15 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import MovieLayoutHoc from "../layout/Movie-layout";
 import { MovieContext } from "../context/Movie-context";
-import Slider from "react-slick";
 import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
 import PosterSlider from "../components/PosterSlider/PosterSlider-Component";
 import MovieHero from "../components/MovieHero/MovieHero-Component";
 import Cast from "../components/Cast/Cast-Component.js";
-
+// swiper import
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 const MoviePage = () => {
   const { id } = useParams();
   const { movie, setMovie } = useContext(MovieContext);
@@ -55,69 +58,65 @@ const MoviePage = () => {
     requestMovie();
   }, [id]);
 
-  const settingCast = {
-    infinte: false,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 4,
-    initialScroll: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
+  const slideSettingCastConfig = {
+    slidesPerView: 6,
+    spaceBetween: 20,
+    loop: true,
+    pagination: {
+      clickable: true,
+    },
+    breakpoints: {
+      350: {
+        slidesPerView: 2,
+        spaceBetween: 20,
       },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 20,
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
+      1000: {
+        slidesPerView: 4,
+        spaceBetween: 20,
       },
-    ],
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+    },
+    modules: [Navigation],
+    className: "mySwiper",
+    navigation: true,
   };
 
-  const settings = {
-    infinte: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
+
+  const slideConfig = {
+    slidesPerView: 5,
+    spaceBetween: 20,
+    loop: true,
+    pagination: {
+      clickable: true,
+    },
+    breakpoints: {
+      350: {
+        slidesPerView: 2,
+        spaceBetween: 20,
       },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 3,
-        },
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 20,
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          initialSlide: 4,
-        },
+      1000: {
+        slidesPerView: 4,
+        spaceBetween: 20,
       },
-    ],
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+    },
+    modules: [Navigation],
+    className: "mySwiper",
+    navigation: true,
   };
 
   return (
@@ -178,15 +177,18 @@ const MoviePage = () => {
           <h2 className="text-gray-800 font-bold text-2xl mb-4">
             Cast and Crew
           </h2>
-          <Slider {...settingCast}>
+          
+          <Swiper {...slideSettingCastConfig}>
             {cast.map((castData) => (
+               <SwiperSlide>
               <Cast
                 image={castData.profile_path}
                 castName={castData.original_name}
                 role={castData.character}
               />
+              </SwiperSlide>
             ))}
-          </Slider>
+          </Swiper>
         </div>
 
         <div className="my-8">
@@ -196,7 +198,8 @@ const MoviePage = () => {
         {/* REcommended movies slider */}
         <div className="my-8">
           <PosterSlider
-            config={settings}
+            
+            config={slideConfig}
             title="Recommended Movies"
             posters={recommendedMovies}
             isDark={false}
@@ -208,12 +211,14 @@ const MoviePage = () => {
         </div>
 
         {/* Book my show exclusive */}
+       
         <PosterSlider
-          config={settings}
+          config={slideConfig}
           title="BMS Exclusive"
           posters={SimilarMovies}
           isDark={false}
         />
+        
       </div>
     </>
   );
