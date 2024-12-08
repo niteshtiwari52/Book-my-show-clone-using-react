@@ -12,7 +12,6 @@ axios.defaults.baseURL = "https://api.themoviedb.org/3";
 axios.defaults.params = {};
 axios.defaults.params["api_key"] = process.env.REACT_APP_API_KEY;
 axios.defaults.headers['Authorization'] = `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`;
-
 function App() {
   return (
     <>
